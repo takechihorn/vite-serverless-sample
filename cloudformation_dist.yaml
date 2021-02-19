@@ -1,0 +1,109 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  viteServerLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: vite-deploy-takechi
+        S3Key: d991fef2b0ddeb077d1ebf9b882257e5
+      Timeout: 5
+      MemorySize: 512
+      FunctionName: vite_sample_server
+      Role:
+        Fn::GetAtt:
+        - viteServerLambdaRole
+        - Arn
+      Runtime: nodejs12.x
+      Handler: server/index.handler
+  viteServerLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns:
+      - Ref: viteServerLambdaPolicy
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+  viteServerLambdaPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+        - Effect: Allow
+          Action:
+          - logs:CreateLogStream
+          - logs:PutLogEvents
+          - logs:CreateLogGroup
+          Resource: arn:aws:logs:*:*:*
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName:
+        Fn::Sub: /aws/lambda/${viteServerLambda}
+      RetentionInDays: 3
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      DefinitionBody:
+        swagger: '2.0'
+        info:
+          version: 1.0.0
+          title: vite_lambda_sample
+        basePath: dev
+        x-amazon-apigateway-binary-media-types:
+        - '*/*'
+        paths:
+          /:
+            get:
+              produces:
+              - application/json
+              responses:
+                '200':
+                  description: 200 response
+                  schema:
+                    $ref: '#/definitions/Empty'
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${viteServerLambda.Arn}/invocations
+                responses:
+                  default:
+                    statusCode: '200'
+                passthroughBehavior: when_no_match
+                httpMethod: POST
+                contentHandling: CONVERT_TO_TEXT
+                type: aws_proxy
+          /{proxy+}:
+            get:
+              produces:
+              - application/json
+              responses:
+                '200':
+                  description: 200 response
+                  schema:
+                    $ref: '#/definitions/Empty'
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${viteServerLambda.Arn}/invocations
+                responses:
+                  default:
+                    statusCode: '200'
+                passthroughBehavior: when_no_match
+                httpMethod: POST
+                contentHandling: CONVERT_TO_TEXT
+                type: aws_proxy
+  ApiPermission:
+    Type: AWS::Lambda::Permission
+    DependsOn:
+    - ApiGateway
+    - viteServerLambda
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: viteServerLambda
+      Principal: apigateway.amazonaws.com

@@ -1,0 +1,52 @@
+{
+  "/Users/takeru/vite-serverless-sample/ssr-vue/node_modules/@vue/shared/dist/shared.esm-bundler.js": [
+    "/assets/vendor.01f25a3a.js"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js": [
+    "/assets/vendor.01f25a3a.js"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js": [
+    "/assets/vendor.01f25a3a.js"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js": [
+    "/assets/vendor.01f25a3a.js"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/node_modules/vue/dist/vue.runtime.esm-bundler.js": [
+    "/assets/vendor.01f25a3a.js"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/node_modules/vue-router/dist/vue-router.esm-bundler.js": [
+    "/assets/vendor.01f25a3a.js"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/src/pages/About.vue?vue&type=style&index=0&scoped=true&lang.css": [
+    "/assets/About.c0bcda7a.js",
+    "/assets/About.74f51fff.css"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/src/pages/About.vue": [
+    "/assets/About.c0bcda7a.js",
+    "/assets/About.74f51fff.css"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/src/assets/logo.png": [
+    "/assets/Home.9da9f8a5.js",
+    "/assets/Home.14987cb1.css"
+  ],
+  "@foo": [
+    "/assets/Home.9da9f8a5.js",
+    "/assets/Home.14987cb1.css"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/src/pages/Home.vue?vue&type=style&index=0&scoped=true&lang.css": [
+    "/assets/Home.9da9f8a5.js",
+    "/assets/Home.14987cb1.css"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/src/pages/Home.vue": [
+    "/assets/Home.9da9f8a5.js",
+    "/assets/Home.14987cb1.css"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/src/components/foo.css": [
+    "/assets/Foo.bdb50845.js",
+    "/assets/Foo.6ac8e7a5.css"
+  ],
+  "/Users/takeru/vite-serverless-sample/ssr-vue/src/components/Foo.jsx": [
+    "/assets/Foo.bdb50845.js",
+    "/assets/Foo.6ac8e7a5.css"
+  ]
+}
